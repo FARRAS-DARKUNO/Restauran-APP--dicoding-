@@ -1,7 +1,7 @@
 import 'api.dart';
 import 'dart:convert';
 
-import '../model/restaurant.dart';
+import '../model/restauran_detail_data/restaurant.dart';
 
 class RestaurantDetail {
   final Api? api = Api();

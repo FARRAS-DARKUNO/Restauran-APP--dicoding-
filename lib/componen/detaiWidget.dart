@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/menu.dart';
+import '../model/restauran_detail_data/menu.dart';
 import '../text_theme.dart';
 
 class DetailWidget extends StatelessWidget {
