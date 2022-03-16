@@ -65,12 +65,12 @@ class _HomesState extends State<Homes> {
                                 //final datas = dataRestaurant[index];
                                 return InkWell(
                                   onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => DetailMenu(
-                                                  angka: index,
-                                                )));
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => DetailMenu(
+                                    //               angka: index,
+                                    //             )));
                                   },
                                   child: Card(
                                     child: ClipRRect(

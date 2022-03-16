@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         textTheme: myTextTheme,
       ),
-      home: Homes(),
+      home: DetailMenu(idRestorant: 'fnfn8mytkpmkfw1e867'),
     );
   }
 }
