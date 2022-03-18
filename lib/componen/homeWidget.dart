@@ -3,8 +3,10 @@ import 'package:restaurant_app/deatail_menu.dart';
 import '../api/get_home_detail.dart';
 import '../text_theme.dart';
 import '../model/home_detail_data/homerestoran.dart';
+import 'searchingwidget.dart';
+import '../search.dart';
 
-class HomeWidget extends StatelessWidget {
+class HomeWidget extends StatefulWidget {
   final bool error;
   //final String message;
   final int count;
@@ -12,6 +14,13 @@ class HomeWidget extends StatelessWidget {
 
   const HomeWidget(this.error, this.count, this.restaurants, {Key? key})
       : super(key: key);
+
+  @override
+  State<HomeWidget> createState() => _HomeWidgetState();
+}
+
+class _HomeWidgetState extends State<HomeWidget> {
+  TextEditingController controllers = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +64,49 @@ class HomeWidget extends StatelessWidget {
                           SizedBox(
                             height: 10,
                           ),
+                          TextField(
+                            controller: controllers,
+                            onChanged: (Pencarian) {
+                              setState(() {});
+                            },
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.search),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 34, 205, 211),
+                                    width: 3.0),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromARGB(255, 34, 205, 211),
+                                    width: 1.0),
+                              ),
+                              hintText: 'Mobile Number',
+                            ),
+                          ),
+                          Container(
+                            color: Color.fromARGB(255, 34, 205, 211),
+                            child: TextButton(
+                              style: ButtonStyle(
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.black),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Search(
+                                            seacrhingfile: controllers.text)));
+                              },
+                              child: Text('Cari'),
+                            ),
+                          ),
                           SizedBox(
                             height: 10,
                           ),
                           ListView.builder(
-                            itemCount: this.restaurants.length,
+                            itemCount: this.widget.restaurants.length,
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
@@ -70,8 +117,10 @@ class HomeWidget extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => DetailMenu(
-                                              idRestorant:
-                                                  this.restaurants[index].id)));
+                                              idRestorant: this
+                                                  .widget
+                                                  .restaurants[index]
+                                                  .id)));
                                 },
                                 child: Card(
                                   child: ClipRRect(
@@ -88,7 +137,7 @@ class HomeWidget extends StatelessWidget {
                                             Expanded(
                                               flex: 1,
                                               child: Image.network(
-                                                  'https://restaurant-api.dicoding.dev/images/medium/${this.restaurants[index].pictureId}'),
+                                                  'https://restaurant-api.dicoding.dev/images/medium/${this.widget.restaurants[index].pictureId}'),
                                             ),
                                             SizedBox(width: 10),
                                             Expanded(
@@ -99,6 +148,7 @@ class HomeWidget extends StatelessWidget {
                                                 children: <Widget>[
                                                   Text(
                                                     this
+                                                        .widget
                                                         .restaurants[index]
                                                         .name,
                                                     style: Theme.of(context)
@@ -116,6 +166,7 @@ class HomeWidget extends StatelessWidget {
                                                       Icon(Icons.location_on),
                                                       Text(
                                                         this
+                                                            .widget
                                                             .restaurants[index]
                                                             .city,
                                                         style: Theme.of(context)
