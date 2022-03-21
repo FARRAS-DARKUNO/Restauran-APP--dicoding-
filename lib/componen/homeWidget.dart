@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_app/deatail_menu.dart';
 import '../api/get_home_detail.dart';
 import '../text_theme.dart';
@@ -37,7 +38,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                   height: 170,
                   child: Center(
                     child: Text(
-                      'DICODING RESTAURANT',
+                      'DICODING Restaurant',
                       style: Theme.of(context).textTheme.headline4,
                       //textAlign: TextAlign.start,
                     ),
@@ -153,7 +154,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         .name,
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .titleLarge,
+                                                        .bodyLarge,
                                                   ),
                                                   SizedBox(
                                                     height: 10,
@@ -163,7 +164,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: <Widget>[
-                                                      Icon(Icons.location_on),
+                                                      Icon(
+                                                        Icons.location_on,
+                                                        size: 16,
+                                                      ),
                                                       Text(
                                                         this
                                                             .widget
@@ -171,7 +175,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                             .city,
                                                         style: Theme.of(context)
                                                             .textTheme
-                                                            .bodyLarge,
+                                                            .subtitle2,
                                                       ),
                                                     ],
                                                   ),

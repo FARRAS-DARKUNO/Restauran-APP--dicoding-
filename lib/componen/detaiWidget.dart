@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../model/restauran_detail_data/menu.dart';
 import '../text_theme.dart';
+import 'package:provider/provider.dart';
 
-class DetailWidget extends StatelessWidget {
+class DetailWidget extends StatefulWidget {
   final String id;
   final String name;
   final String description;
@@ -15,6 +16,15 @@ class DetailWidget extends StatelessWidget {
       {Key? key})
       : super(key: key);
 
+  @override
+  State<DetailWidget> createState() => _DetailWidgetState();
+}
+
+class _DetailWidgetState extends State<DetailWidget> {
+  Color _colora = Colors.white;
+  Color _colorb = Colors.white;
+  Color _color1 = Colors.white;
+  Color _color2 = Color.fromARGB(255, 106, 162, 207);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +41,7 @@ class DetailWidget extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: Image.network(
-                        'https://restaurant-api.dicoding.dev/images/medium/${this.pictureId}'),
+                        'https://restaurant-api.dicoding.dev/images/medium/${this.widget.pictureId}'),
                   ),
                 ),
               ),
@@ -42,7 +52,7 @@ class DetailWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    this.name,
+                    this.widget.name,
                     style: Theme.of(context).textTheme.headline5,
                   ),
                   Row(
@@ -52,7 +62,7 @@ class DetailWidget extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        this.city,
+                        this.widget.city,
                       ),
                     ],
                   ),
@@ -62,7 +72,7 @@ class DetailWidget extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                this.description,
+                this.widget.description,
                 style: Theme.of(context).textTheme.bodyText2,
                 textAlign: TextAlign.justify,
               ),
@@ -91,14 +101,27 @@ class DetailWidget extends StatelessWidget {
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: this.menus.foods.length,
+                            itemCount: this.widget.menus.foods.length,
                             itemBuilder: (context, index) {
                               return InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  setState(() {
+                                    _colora = _color2;
+                                  });
+                                },
                                 child: Card(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Text(this.menus.foods[index].name),
+                                  child: Container(
+                                    color: _colora,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Center(
+                                        child: Text(this
+                                            .widget
+                                            .menus
+                                            .foods[index]
+                                            .name),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               );
@@ -122,14 +145,27 @@ class DetailWidget extends StatelessWidget {
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: this.menus.drinks.length,
+                            itemCount: this.widget.menus.drinks.length,
                             itemBuilder: (context, index) {
                               return InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  setState(() {
+                                    _colorb = _color2;
+                                  });
+                                },
                                 child: Card(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Text(this.menus.drinks[index].name),
+                                  child: Container(
+                                    color: _colorb,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Center(
+                                        child: Text(this
+                                            .widget
+                                            .menus
+                                            .drinks[index]
+                                            .name),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               );
